@@ -20,11 +20,11 @@
 ```
 
 #### 예시 결과
-
-실행 : `./bin/hadoop jar mywordcount.jar wordcount input.txt output enim`
+```
+실행 : ./bin/hadoop jar mywordcount.jar wordcount input.txt output enim
 
 결과 : enim	5
-
+```
 ---
 ## Combiner 적용 전 후 비교
 #### <Combiner 적용 전>
