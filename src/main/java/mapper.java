@@ -1,3 +1,4 @@
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -14,15 +15,13 @@ public class mapper extends Mapper<LongWritable, Text, Text, IntWritable> {
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
         StringTokenizer stringTokenizer = new StringTokenizer(value.toString().toLowerCase(), "\t\n\r\f,.`\"():;?![₩~/]' \"\\");
+        Configuration conf = context.getConfiguration();
+        String from_user = conf.get("User Parameter");
 
         while (stringTokenizer.hasMoreTokens()) {
             word.set(stringTokenizer.nextToken());
-            context.write(word, one);
+            if(from_user.equals(word.toString()))
+                context.write(word, one);
         }
     }
-
-    /*
-    public void combiner(Text key, Iterable<LongWritable> values, Context context) {
-    }
-     */
 }
